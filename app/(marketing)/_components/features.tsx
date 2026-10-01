@@ -1,6 +1,7 @@
 import { Icon } from "./icon";
 import type { IconName } from "./icons";
-import { SectionHeading } from "./ui";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 const features: { icon: IconName; iconBg: string; title: string; body: string; chips: string[] }[] = [
   {
@@ -42,23 +43,29 @@ export function Features() {
         description="Built around how Filipino students actually hunt for OJT: group chats, MOAs, required hours and all."
       />
       <ul className="grid gap-6 lg:grid-cols-2">
-        {features.map((feature) => (
-          <li key={feature.title} className="flex flex-col gap-4 rounded-[24px] border border-border bg-surface p-8">
-            <div className={`flex size-12 items-center justify-center rounded-[14px] ${feature.iconBg}`}>
-              <Icon name={feature.icon} />
-            </div>
-            <h3 className="text-[24px] font-extrabold text-ink">{feature.title}</h3>
-            <p className="text-[16px] leading-normal text-muted">{feature.body}</p>
-            <ul className="flex flex-wrap gap-2 pt-1">
-              {feature.chips.map((chip) => (
-                <li
-                  key={chip}
-                  className="rounded-full bg-surface-alt px-3 py-1.5 text-[13px] font-semibold whitespace-nowrap text-ink"
+        {features.map((feature, index) => (
+          <li key={feature.title}>
+            <Reveal delay={(index % 2) * 120} className="h-full">
+              <div className="group flex h-full flex-col gap-4 rounded-[24px] border border-border bg-surface p-8 transition duration-300 motion-safe:hover:-translate-y-1.5 motion-safe:hover:rotate-1 hover:shadow-[0_20px_40px_rgba(22,24,29,0.08)]">
+                <div
+                  className={`flex size-12 items-center justify-center rounded-[14px] transition-transform duration-700 ease-in-out motion-safe:group-hover:rotate-[360deg] ${feature.iconBg}`}
                 >
-                  {chip}
-                </li>
-              ))}
-            </ul>
+                  <Icon name={feature.icon} />
+                </div>
+                <h3 className="text-[24px] font-extrabold text-ink">{feature.title}</h3>
+                <p className="text-[16px] leading-normal text-muted">{feature.body}</p>
+                <ul className="flex flex-wrap gap-2 pt-1">
+                  {feature.chips.map((chip) => (
+                    <li
+                      key={chip}
+                      className="rounded-full bg-surface-alt px-3 py-1.5 text-[13px] font-semibold whitespace-nowrap text-ink"
+                    >
+                      {chip}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           </li>
         ))}
       </ul>

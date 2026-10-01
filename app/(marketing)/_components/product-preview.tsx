@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { Asset, Icon } from "./icon";
+import { Asset } from "@/components/ui/asset";
+import { Icon } from "./icon";
 import type { IconName } from "./icons";
 
 // A static, decorative picture of the board. It is not interactive and hidden
@@ -294,7 +295,7 @@ function Main() {
 
 export function ProductPreview() {
   return (
-    <div aria-hidden="true" className="hidden w-[1100px] max-w-full flex-col items-center overflow-clip pt-10 lg:flex">
+    <div aria-hidden="true" className="flex w-[1100px] max-w-full flex-col items-center overflow-clip pt-10">
       <div className="relative h-[640px] w-full shrink-0 overflow-clip rounded-t-[20px] border border-border bg-surface shadow-[0_24px_60px_rgba(23,23,28,0.12)]">
         <div className="absolute -top-px -left-px flex w-[1100px] items-start overflow-clip bg-bg">
           <Sidebar />

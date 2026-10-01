@@ -1,5 +1,8 @@
-import { Asset, Icon } from "./icon";
-import { Badge, Button } from "./ui";
+import { Asset } from "@/components/ui/asset";
+import { Icon } from "./icon";
+import { Reveal } from "@/components/ui/reveal";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const points = [
   "A match score with reasons, not a black box",
@@ -57,7 +60,9 @@ const matches: Match[] = [
 function MatchCard({ match }: { match: Match }) {
   return (
     <article
-      className={`flex gap-5 rounded-[16px] border border-border bg-surface p-5 ${match.dimmed ? "opacity-60" : ""}`}
+      className={`group flex gap-5 rounded-[16px] border border-border bg-surface p-5 transition duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:-rotate-[0.6deg] hover:shadow-[0_16px_32px_rgba(0,0,0,0.3)] ${
+        match.dimmed ? "opacity-60 hover:opacity-100" : ""
+      }`}
     >
       <div className="relative size-[60px] shrink-0 overflow-clip" role="img" aria-label={`${match.score}% match`}>
         <Asset src="/landing/ring-track.svg" width={60} className="absolute top-0 left-0" />
@@ -69,7 +74,7 @@ function MatchCard({ match }: { match: Match }) {
       <div className="flex min-w-px flex-1 flex-col gap-3">
         <div className="flex items-center gap-3">
           <div
-            className={`flex size-9 shrink-0 items-center justify-center rounded-[9px] text-[12px] font-extrabold ${match.logo}`}
+            className={`flex size-9 shrink-0 items-center justify-center rounded-[9px] text-[12px] font-extrabold transition-transform duration-700 ease-in-out motion-safe:group-hover:rotate-[360deg] ${match.logo}`}
           >
             {match.initials}
           </div>
@@ -107,7 +112,7 @@ export function AiSection() {
       id="ai"
       className="flex scroll-mt-4 flex-col items-center gap-12 bg-ink px-6 py-[112px] lg:flex-row lg:gap-20 lg:px-[120px]"
     >
-      <div className="flex min-w-px flex-1 flex-col gap-5">
+      <Reveal className="flex min-w-px flex-1 flex-col gap-5">
         <p className="flex items-center gap-2 text-[13px] font-bold text-[#c4b5fc]">
           <Icon name="aiSparkles" />
           FOR YOU · AI
@@ -129,10 +134,12 @@ export function AiSection() {
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
       <div className="flex w-full shrink-0 flex-col gap-4 lg:w-[560px]">
-        {matches.map((match) => (
-          <MatchCard key={match.company} match={match} />
+        {matches.map((match, index) => (
+          <Reveal key={match.company} delay={150 + index * 150}>
+            <MatchCard match={match} />
+          </Reveal>
         ))}
       </div>
     </section>

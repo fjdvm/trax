@@ -1,4 +1,4 @@
-import { Asset } from "./icon";
+import { Asset } from "@/components/ui/asset";
 
 const links = [
   { href: "#features", label: "Features" },
